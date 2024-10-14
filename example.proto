@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option go_package = "github.com/abferm/giorpc";
+
+
+package giorpc;
+
+service Giorpc {
+    rpc Encode (EncodeRequest) returns (EncodeResponse) {}
+    rpc Decode (DecodeRequest) returns (DecodeResponse) {}
+}
+
+
+enum Encoding {
+    ENCODING_UNSPECIFIED = 0;
+    ENCODING_BASE32_STANDARD = 1;
+    ENCODING_BASE32_HEXIDECIMAL = 2;
+    ENCODING_BASE64_STANDARD = 3;
+    ENCODING_BASE64_URL_SAFE = 4;
+
+}
+
+message EncodeRequest {
+    Encoding encoding = 1;
+    string decoded = 2;
+}
+
+message EncodeResponse {
+    string encoded = 1;
+}
+
+message DecodeRequest {
+    Encoding encoding = 1;
+    string encoded = 2;
+}
+
+message DecodeResponse {
+    string decoded = 1;
+}
